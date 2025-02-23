@@ -1,0 +1,25 @@
+#Tugas 1 praktikum PEMWEB
+
+##!. Apa yang dimaksud dengan dokumen root?
+    Dokumen root adalah folder utama tempat file-file website disimpan
+
+##2. Pada apache web server, apakah dokumen root harus di C:/xampp/htdocs
+    dokumen root pada Apache web server dapat dirubah sesuai keinginan melalui file httpd.conf
+
+##3. Penjelasan singkat tentang perintah git:t : init, clone, remote, add, commit, push dan checkout
+    - git init -> Membuat repository git di folder proyek
+    - git clone -> Mengambil repository dari GitHub ke komputer lokal
+    - git remote -> Menghubungkan repository lokal ke repository di GitHub
+    - git add -> menambahkan file yang diubah ke daftar yang akan disimpan
+    - git commit -> Menyimpan perubahan dengan pesan tertentu
+    - git push -> Mengirim perubahan dari lokal ke repository di GitHub
+    - git checkout -> Berpindah ke branch baru
+
+##4. Jelaskan perbedaan antara GitHub dan GitLab
+    Perbedaan paling signifikan antara keduanya adalah GitHub yang merupakan platform kolaborasi yang membantu meninjau dan mengelola kode dari jarak jauh, GitLab lebih fokus pada DevOps dan CI/CD
+
+##5. Apa bedanya variable user dengan variable system ?
+    Variabel sistem telah didefinisikan oleh system sedankan variable user didefinisikan sendiri
+
+##6. Apa persamaan variable system dengan variable constant ?
+    Tetapi keduanya dapat bekerja sama dalam memecahkan masalah
