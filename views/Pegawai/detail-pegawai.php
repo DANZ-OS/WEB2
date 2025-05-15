@@ -1,18 +1,18 @@
 <?php
-require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../../models/Pegawai.php';
 
-use models\User;
+use models\Pegawai;
 
 if(!isset($_GET['id'])){
-    header("Location: list-user.php");
+    header("Location: list-pegawai.php");
     exit;
 }
 
-$user = User::find($_GET['id']);
+$user = Pegawai::find($_GET['id']);
 
-if(!$user) {
-    header("Location: list-user.php");
-    exit;
+if(!$user){
+    header("Location: list-pegawai.php");
+    exit; 
 }
 
 ?>
@@ -21,20 +21,21 @@ if(!$user) {
 <html lang="en">
 
 <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Praktikum 06</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="../public/css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Koperasi</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="../../public/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="dashboard.php">Praktikum 06</a>
+            <a class="navbar-brand ps-3" href="../dashboard.php">Project 1</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -51,7 +52,9 @@ if(!$user) {
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
                         <li><a class="dropdown-item" href="#!">Logout</a></li>
                     </ul>
                 </li>
@@ -62,10 +65,10 @@ if(!$user) {
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Menu</div>
-                            <a class="nav-link" href="list-user.php">
+                            <div class="sb-sidenav-menu-heading">Main Menu</div>
+                            <a class="nav-link" href="list-pegawai.php">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
-                                User
+                                Anggota
                             </a>
                         </div>
                     </div>
@@ -78,49 +81,44 @@ if(!$user) {
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Add User</h1>
+                        <h1 class="mt-4">Tambah Pegawai</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="list-user.php">User</a></li>
-                            <li class="breadcrumb-item active">Detail User</a></li>
+                            <li class="breadcrumb-item"><a href="list-pegawai.php">Pegawai</a></li>
+                            <li class="breadcrumb-item active">Detail</li>
                         </ol>
-                       
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Add User
+                                Tambah Pegawai
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>First Name</th>
-                                        <td><?= $user['firstname'] ?></td>
+                                        <th>NIP</th>
+                                        <td><?= $user['nip'] ?></td>
                                     </tr>
                                     <tr>
-                                        <th>Last Name</th>
-                                        <td><?= $user['lastname'] ?></td>
+                                        <th>Nama</th>
+                                        <td><?= $user['nama'] ?></td>
                                     </tr>
                                     <tr>
-                                        <th>Gender</th>
-                                        <td><?= $user['gender'] ?></td>
+                                        <th>Jenis Kelamin</th>
+                                        <td><?= $user['jenis_kelamin'] ?></td>
                                     </tr>
                                     <tr>
-                                        <th>Age</th>
-                                        <td><?= $user['age'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Weight</th>
-                                        <td><?= $user['weight'] ?></td>
+                                        <th>Jabatan</th>
+                                        <td><?= $user['jabatan'] ?></td>
                                     </tr>
                                 </table>
 
                                 <div class="mt-3">
-                                    <a href="list-user.php" class="btn btn-secondary"><i class="fas 
-                                    fa-arrow-left"></i> Back</a>
-                                    <a href="edit-user.php/id=</=$user['id'] ?>" class="btn 
+                                    <a href="list-pegawai.php" class="btn btn-secondary"><i class="fas
+                                     fa-arrow-left"></i> Back</a>
+                                    <a href="edit-pegawai.php?id=<?= $user['id'] ?>" class="btn 
                                     btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                                    <a href="delete-user.php/id=</=$user['id'] ?>" class="btn 
-                                    btn-danger"><i class="fas fa-trash"> Delete</i></a>
+                                    <a href="delete-pegawai.php?id=<?= $user['id'] ?>" class="btn 
+                                    btn-danger"><i class="fas fa-trash"></i> Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +127,7 @@ if(!$user) {
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; DANZ Company <?= date('Y') ?></div>
+                            <div class="text-muted">Copyright &copy; Project 1 <?= date('Y') ?></div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
@@ -141,9 +139,8 @@ if(!$user) {
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="../public/js/scripts.js"></script>
+        <script src="../../public/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../public/js/datatables-simple-demo.js"></script>
+        <script src="../../public/js/datatables-simple-demo.js"></script>
     </body>
-
 </html>

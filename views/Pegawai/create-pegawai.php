@@ -1,35 +1,20 @@
 <?php
-require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../../models/Pegawai.php';
 
-use models\User;
+use models\Pegawai;
 
-if(!isset($_GET['id'])){
-    header("Location: list-user.php");
-    exit;
-}
-
-$user = User::find($_GET['id']);
-
-if(!$user) {
-    header("Location: list-user.php");
-    exit;
-}
-
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $data = [
-        'id' => $_GET['id'],
-        'firstname' => $_POST['firstname'],
-        'lastname' => $_POST['lastname'],
-        'gender' => $_POST['gender'],
-        'age' => $_POST['age'],
-        'weight' => $_POST['weight'],
+        'nip' => $_POST['nip'],
+        'nama' => $_POST['nama'],
+        'jenis_kelamin' => $_POST['jenis_kelamin'],
+        'jabatan' => $_POST['jabatan'],
     ];
 
-    User::update($data);
-    header("Location: list-user.php");
+    Pegawai::create($data);
+    header("Location: list-pegawai.php");
     exit;
 }
-
 
 ?>
 
@@ -37,20 +22,21 @@ if(isset($_POST['submit'])){
 <html lang="en">
 
 <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Praktikum 06</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="../public/css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Koperasi</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="../../public/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="dashboard.php">Praktikum 06</a>
+            <a class="navbar-brand ps-3" href="../dashboard.php">Project 1</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -67,7 +53,9 @@ if(isset($_POST['submit'])){
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
                         <li><a class="dropdown-item" href="#!">Logout</a></li>
                     </ul>
                 </li>
@@ -78,10 +66,10 @@ if(isset($_POST['submit'])){
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Menu</div>
-                            <a class="nav-link" href="list-user.php">
+                            <div class="sb-sidenav-menu-heading">Main Menu</div>
+                            <a class="nav-link" href="list-pegawai.php">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
-                                Add User
+                                Anggota
                             </a>
                         </div>
                     </div>
@@ -94,60 +82,52 @@ if(isset($_POST['submit'])){
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Add User</h1>
+                        <h1 class="mt-4">Tambah Pegawai</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="list-user.php">User</a></li>
-                            <li class="breadcrumb-item active">Add User</a></li>
+                            <li class="breadcrumb-item"><a href="list-pegawai.php">Pegawai</a></li>
+                            <li class="breadcrumb-item active">Tambah Pegawai</li>
                         </ol>
-                       
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Add User
+                                Tambah Pegawai
                             </div>
                             <div class="card-body">
-                                <form action="edit-user.php?id=<?= $user['id'] ?>" method="POST">
+                                <form action="create-pegawai.php" method="POST">
                                     <div class="mb-3">
-                                        <label for="firstname" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="firstname" 
-                                        name="firstname" value="<?= $user['firstname'] ?>" required>
+                                        <label for="nip" class="form-label">NIP</label>
+                                        <input type="number" class="form-control" id="nip" 
+                                        name="nip" min="0" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="lastname" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="lastname" 
-                                        name="lastname" value="<?= $user['lastname'] ?>" required>
+                                        <label for="nama" class="form-label">Nama</label>
+                                        <input type="text" class="form-control" id="nama" 
+                                        name="nama" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label d-block">Gender</label>
+                                        <label class="form-label d-block">Jenis Kelamin</label>
                                         <div class="form-check form-check-inline">
                                             <input type="radio" class="form-check-input"
-                                            name="gender" id="laki-laki" value="Laki-laki" <?= $user
-                                            ['gender'] === 'Laki-laki' ? 'checked' : '' ?>>
-                                            <label for="laki-laki" class="form-check-label">Laki-laki</label>
+                                             name="jenis_kelamin" id="laki-laki" value="Laki-laki">
+                                             <label for="laki-laki" class="form-check-label">Laki-laki</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input type="radio" class="form-check-input"
-                                            name="gender" id="perempuan" value="Perempuan" <?= $user
-                                            ['gender'] === 'Perempuan' ? 'checked' : '' ?>>
-                                            <label for="perempuan" class="form-check-label">Perempuan</label>
+                                             name="jenis_kelamin" id="perempuan" value="Perempuan">
+                                             <label for="perempuan" class="form-check-label">Perempuan</label>
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="age" class="form-label">Age</label>
-                                        <input type="number" class="form-control" id="age" 
-                                        name="age" min="0" max="100" value="<?= $user['age'] ?>" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="age" class="form-label">weight</label>
-                                        <input type="number" class="form-control" id="weight" 
-                                        name="weight" min="0" max="150" value="<?= $user['weight'] ?>" required>
+                                        <label for="jabatan" class="form-label">Jabatan</label>
+                                        <input type="text" class="form-control" id="jabatan" 
+                                        name="jabatan" required>
                                     </div>
 
-                                    <a href="list-user.php" class="btn btn-secondary"><i class="fas 
-                                    fa-arrow-left"></i> Back</a>
-                                    <button type="submit" name="submit" class="btn btn-warning"><i class="fas 
-                                    fa-save"></i> Update</button>
+                                    <a href="list-pegawai.php" class="btn btn-secondary"><i class="fas
+                                     fa-arrow-left"></i> Back</a>
+                                     <button type="submit" name="submit" class="btn btn-primary"><i class="fas
+                                      fa-save"></i> Save</button>
                                 </form>
                             </div>
                         </div>
@@ -156,7 +136,7 @@ if(isset($_POST['submit'])){
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; DANZ Company <?= date('Y') ?></div>
+                            <div class="text-muted">Copyright &copy; Project 1 <?= date('Y') ?></div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
@@ -168,8 +148,8 @@ if(isset($_POST['submit'])){
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="../public/js/scripts.js"></script>
+        <script src="../../public/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../public/js/datatables-simple-demo.js"></script>
+        <script src="../../public/js/datatables-simple-demo.js"></script>
     </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-$host = 'localhost';
-$db = 'learn_pdo';
-$user = 'root';
-$password = '';
+$host       = 'localhost';
+$db         = 'db_koperasi';
+$user       = 'root';
+$password   = '';
